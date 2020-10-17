@@ -1,4 +1,48 @@
-## Kafka
+## Use
+
+Must install docker-compose
+```bash
+./up.sh
+
+
+#Run Sawtooth transaction processor
+cd ./tp
+  npm install
+  ./run.sh
+cd -
+
+
+```
+Mongo Express to see mongodb:
+http://localhost:8081/
+
+```bash
+
+cd ./app
+  npm install
+  node ./sawtooth-post.js
+  node ./sawtooth-post.js
+  node ./mongo-sample.js
+
+
+  #kafka
+  node ./send.js
+  node ./receive.js
+  node ./send.js  #Repeat
+cd -
+
+
+./down.sh
+
+```
+
+
+## Details
+
+Only tested with node v10, Im not sure sawtooth SDK works for other versions
+
+
+## Docs Kafka
 https://hub.docker.com/r/bitnami/kafka/
 'Accessing Kafka with internal and external clients'
 

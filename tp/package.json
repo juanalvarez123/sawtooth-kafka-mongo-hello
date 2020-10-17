@@ -1,6 +1,7 @@
 {
-  "name": "app",
+  "name": "tp",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -8,13 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.20.0",
     "cbor": "^5.1.0",
-    "mongodb": "^3.6.2",
-    "node-rdkafka": "^2.9.1",
-    "sawtooth-sdk": "^1.0.5",
-    "underscore": "^1.11.0"
-  },
-  "devDependencies": {},
-  "description": ""
+    "sawtooth-sdk": "^1.0.5"
+  }
 }
