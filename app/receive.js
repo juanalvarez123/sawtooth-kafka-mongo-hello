@@ -1,26 +1,15 @@
-var amqp = require('amqplib/callback_api');
+const Kafka = require('node-rdkafka');
 
-amqp.connect('amqp://localhost', function(error0, connection) {
-    if (error0) {
-        throw error0;
-    }
-    connection.createChannel(function(error1, channel) {
-        if (error1) {
-            throw error1;
-        }
 
-        var queue = 'hello';
+// Read from the librdtesting-01 topic... note that this creates a new stream on each call!
+var stream = new Kafka.KafkaConsumer.createReadStream({
+  'group.id': 'kafka',
+  'metadata.broker.list': '0.0.0.0:9092',
+  }, {}, {
+  topics: ['mytopic']
+});
 
-        channel.assertQueue(queue, {
-            durable: false
-        });
-
-        console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", queue);
-
-        channel.consume(queue, function(msg) {
-            console.log(" [x] Received %s", msg.content.toString());
-        }, {
-            noAck: true
-        });
-    });
+stream.on('data', function(message) {
+  console.log('Got message');
+  console.log(message.value.toString());
 });
