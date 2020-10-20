@@ -1,0 +1,33 @@
+# listeners: 'CLIENT://:9092,EXTERNAL://:30093'
+# interBrokerListenerName: 'CLIENT'
+# advertisedListeners: 'CLIENT://kafka:9092,EXTERNAL://192.168.99.100:30093'
+# listenerSecurityProtocolMap: 'CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT'
+
+
+
+# listeners: 'CLIENT://:9092,EXTERNAL://:9093'
+# interBrokerListenerName: 'CLIENT'
+# advertisedListeners: 'CLIENT://kafka-release:9092,EXTERNAL://192.168.99.100:9093'
+# listenerSecurityProtocolMap: 'CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT'
+
+
+# listeners: 'CLIENT://:9092,EXTERNAL://:9093'
+# interBrokerListenerName: 'CLIENT'
+# advertisedListeners: 'CLIENT://kafka-release:9092,EXTERNAL://192.168.99.100:30093'
+# listenerSecurityProtocolMap: 'CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT'
+
+# externalAccess:
+#   enabled: true
+#   service:
+#     type: LoadBalancer
+#     port: 9094
+
+#     loadBalancerIPs:
+#       - '192.168.99.100'
+
+externalAccess:
+  enabled: true
+  service:
+    type: NodePort
+    nodePorts: 
+      - 30094

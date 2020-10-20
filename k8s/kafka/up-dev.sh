@@ -1,6 +1,8 @@
 #!/bin/bash
 
-helm install kafka-release bitnami/kafka --version 11.8.7
+helm install kafka-release bitnami/kafka --version 11.8.7 -f ./config.yaml
+
+# helm show values bitnami/kafka
 
 kubectl apply -f ./ingress.yaml
 
