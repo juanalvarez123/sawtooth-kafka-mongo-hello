@@ -2,7 +2,7 @@ const Kafka = require('node-rdkafka');
 
 let HOST = process.env.HOST_CONSUMER;
 if(!HOST){
-  HOST = 'localhost:9092';
+  HOST = 'localhost:9093';
 }
 
 console.log('HOST:', HOST);

@@ -3,7 +3,7 @@ const _ = require('underscore');
 
 let HOST = process.env.HOST_PRODUCER;
 if(!HOST){
-  HOST = 'localhost:9092';
+  HOST = 'localhost:9093';
 }
 
 console.log('HOST:', HOST);
