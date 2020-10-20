@@ -1,10 +1,18 @@
 const Kafka = require('node-rdkafka');
 
+let HOST = process.env.HOST_CONSUMER;
+if(!HOST){
+  HOST = 'localhost:9092';
+}
+
+console.log('HOST:', HOST);
+// const HOST = 'localhost:9092';
+// const HOST = '192.168.99.100:30092';
 
 // Read from the librdtesting-01 topic... note that this creates a new stream on each call!
 var stream = new Kafka.KafkaConsumer.createReadStream({
   'group.id': 'kafka',
-  'metadata.broker.list': '0.0.0.0:9092',
+  'metadata.broker.list': HOST,
   }, {}, {
   topics: ['mytopic']
 });

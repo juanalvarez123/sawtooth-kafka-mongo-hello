@@ -1,15 +1,24 @@
 const Kafka = require('node-rdkafka');
 const _ = require('underscore');
 
+let HOST = process.env.HOST_PRODUCER;
+if(!HOST){
+  HOST = 'localhost:9092';
+}
+
+console.log('HOST:', HOST);
+
+// const HOST = '192.168.99.100:30092';
+
 const client = Kafka.AdminClient.create({
   'client.id': 'kafka-admin',
-  'metadata.broker.list': 'localhost:9092'
+  'metadata.broker.list': HOST
 });
 
 
 var consumer = new Kafka.KafkaConsumer({
   'group.id': 'kafka',
-  'metadata.broker.list': 'localhost:9092',
+  'metadata.broker.list': HOST,
 }, {});
 
 consumer.connect();
@@ -49,7 +58,7 @@ consumer
 // This call returns a new writable stream to our topic 'topic-name'
 var stream = Kafka.Producer.createWriteStream({
   'group.id': 'kafka',
-  'metadata.broker.list': 'localhost:9092'
+  'metadata.broker.list': HOST
 }, {}, {
   topic: 'mytopic'
 });
