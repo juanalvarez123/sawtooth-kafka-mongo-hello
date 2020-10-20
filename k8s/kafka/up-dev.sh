@@ -4,9 +4,6 @@ helm install kafka-release bitnami/kafka --version 11.8.7 -f ./config.yaml
 
 # helm show values bitnami/kafka
 
-kubectl apply -f ./ingress.yaml
-
-
 
 # Kafka can be accessed by consumers via port 9092 on the following DNS name from within your cluster:
 
