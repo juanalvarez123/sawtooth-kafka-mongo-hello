@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const Kafka = require('node-rdkafka');
 
 let HOST = process.env.HOST_CONSUMER;

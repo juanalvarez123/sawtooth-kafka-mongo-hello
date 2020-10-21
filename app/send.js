@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const Kafka = require('node-rdkafka');
 const _ = require('underscore');
 
