@@ -1,0 +1,8 @@
+architecture: standalone
+auth:
+  enabled: true
+  rootPassword: "password"
+  username: root
+  password: example
+  database: mydb
+

@@ -1,7 +1,12 @@
 const { MongoClient } = require("mongodb");
 
-// Connection URI
-const uri ="mongodb://root:example@localhost:27017/mydb";
+let uri = process.env.MONGO_URI;
+if(!uri){
+  // uri ="mongodb://root:example@localhost:27017/mydb";
+  uri="mongodb://root:example@192.168.99.100:32017/mydb";
+}
+
+console.log('uri:', uri);
 
 // Create a new MongoClient
 const client = new MongoClient(uri);

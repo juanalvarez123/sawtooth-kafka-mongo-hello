@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb1-lb
+spec:
+  selector:
+    app.kubernetes.io/component: mongodb
+    app.kubernetes.io/instance: mongodb1
+    app.kubernetes.io/name: mongodb
+  ports:
+    - name: mfb1-p
+      port: 27017
+      nodePort: 32017
+  type: LoadBalancer
+
