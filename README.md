@@ -90,6 +90,39 @@ cd ./k8s
 cd -
 ```
 
+## k8s inside cluster
+
+```bash
+cd ./k8s
+  ./up.sh
+cd -
+
+./docker-build.sh
+```
+
+```bash
+kubectl run --rm -it borrar --image le999/app:1.0 --restart=Never -- bash
+
+  cp ./.env.k8s ./.env 
+  
+  node ./sawtooth-post.js
+  node ./sawtooth-get.js
+  node ./mongo-sample.js
+
+
+  #kafka
+  node ./send.js
+  node ./receive.js
+  node ./send.js  #Repeat
+
+```
+
+```bash
+cd ./k8s
+  ./down.sh
+cd -
+```
+
 ## Details
 
 Only tested with node v10, Im not sure sawtooth SDK works for other versions

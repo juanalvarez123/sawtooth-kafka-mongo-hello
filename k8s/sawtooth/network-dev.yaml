@@ -113,16 +113,6 @@ items:
               - -c
               - "sawtooth keygen && tail -f /dev/null"
 
-
-          - name: sawtooth-intkey-tp-js
-            image: le999/tp:1.0
-            command:
-              - bash
-            args:
-              - -c
-              - "VALIDATOR=tcp://$HOSTNAME:4004 node ./index.js"
-
-
 - apiVersion: v1
   kind: Service
   metadata:

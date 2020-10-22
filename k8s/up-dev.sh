@@ -9,5 +9,5 @@ cd ./mongodb
 cd -
 
 cd ./sawtooth
-  ./up.sh
+  ./up-dev.sh
 cd -
