@@ -1,4 +1,4 @@
-## Use
+## docker-compose
 
 Must install docker-compose
 ```bash
@@ -8,7 +8,9 @@ Must install docker-compose
 #Run Sawtooth transaction processor
 cd ./tp
   npm install
-  ./run.sh
+  rm ./.env
+  cp ./.env.docker-compose ./.env 
+  node ./index.js
 cd -
 
 
@@ -20,8 +22,54 @@ http://localhost:8081/
 
 cd ./app
   npm install
+  rm ./.env
+  cp ./.env.docker-compose ./.env 
+  
   node ./sawtooth-post.js
+  node ./sawtooth-get.js
+  node ./mongo-sample.js
+
+  #kafka
+  node ./send.js
+  node ./receive.js
+  node ./send.js  #Repeat
+cd -
+
+
+./down.sh
+
+```
+
+
+## K8s
+
+```bash
+cd ./k8s
+  ./up-dev.sh
+cd -
+
+#Run Sawtooth transaction processor
+cd ./tp
+  npm install
+  rm ./.env
+  cp ./.env.minikube ./.env 
+  node ./index.js
+cd -
+```
+
+Mongo Express:
+http://192.168.99.100:30081/
+
+
+```bash
+
+cd ./app
+  npm install
+  rm ./.env
+  cp ./.env.minikube ./.env 
+  
   node ./sawtooth-post.js
+  node ./sawtooth-get.js
   node ./mongo-sample.js
 
 
@@ -36,6 +84,11 @@ cd -
 
 ```
 
+```bash
+cd ./k8s
+  ./down.sh
+cd -
+```
 
 ## Details
 

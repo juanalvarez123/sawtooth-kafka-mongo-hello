@@ -1,3 +1,6 @@
+require('dotenv').config();
+
+
 const {createContext, CryptoFactory} = require('sawtooth-sdk/signing')
 
 const axios = require('axios');
@@ -8,8 +11,7 @@ const crypto = require('crypto');
 
 const cbor = require('cbor')
 
-const HOST = 'http://localhost:8008';
-// const HOST = 'http://192.168.99.100:30008';
+const HOST = process.env.SAWTOOTH_HOST;
 
 // const hash = (x) =>
 //   crypto.createHash('sha512').update(x).digest('hex').toLowerCase()

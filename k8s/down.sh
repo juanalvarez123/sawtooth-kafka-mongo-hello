@@ -8,3 +8,9 @@ cd ./mongodb
   ./down.sh
 cd -
 
+cd ./sawtooth
+  ./down.sh
+cd -
+
+kubectl delete pvc --all
+kubectl delete pv --all

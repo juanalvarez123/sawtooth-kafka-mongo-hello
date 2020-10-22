@@ -8,3 +8,6 @@ cd ./mongodb
   ./up-dev.sh
 cd -
 
+cd ./sawtooth
+  ./up.sh
+cd -
