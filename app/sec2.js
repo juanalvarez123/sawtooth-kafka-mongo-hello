@@ -138,12 +138,12 @@ const batchListBytes = protobuf.BatchList.encode({
 
   // console.log(Buffer.from(batchListBytes).toString('hex'));
 
-axios.post(`${HOST}/batches`, batchListBytes, {
-  headers: {'Content-Type': 'application/octet-stream'}
-})
-  .then((response) => {
-    console.log(response.data);
-  })
-  .catch((err)=>{
-    console.log(err);
-  });
+// axios.post(`${HOST}/batches`, batchListBytes, {
+//   headers: {'Content-Type': 'application/octet-stream'}
+// })
+//   .then((response) => {
+//     console.log(response.data);
+//   })
+//   .catch((err)=>{
+//     console.log(err);
+//   });

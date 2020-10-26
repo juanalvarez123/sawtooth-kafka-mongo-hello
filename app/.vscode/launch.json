@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/sec2.js"
+            "program": "${workspaceFolder}/secp256k1test.js"
         }
     ]
 }
