@@ -1,11 +1,29 @@
+const { randomBytes } = require('crypto')
+const secp256k1 = require('secp256k1')
+
+const msg = randomBytes(32)
+
+// generate privKey
+let privKey
+do {
+  privKey = randomBytes(32)
+} while (!secp256k1.privateKeyVerify(privKey))
+
+privKey = Buffer.from("104b1cf90d4171c1b606e53ffe2f52c6f46320b06ef9c1a8fa01f5a0c4ca339a", "hex")
+
+// get the public key in a compressed format
+const pubKey = secp256k1.publicKeyCreate(privKey)
+
+// // sign the message
+// const sigObj = secp256k1.ecdsaSign(msg, privKey)
+
+// // verify the signature
+// console.log(secp256k1.ecdsaVerify(sigObj.signature, msg, pubKey))
+
 require('dotenv').config();
 
-const {createContext, CryptoFactory} = require('sawtooth-sdk/signing')
-
 const axios = require('axios');
-const context = createContext('secp256k1')
-const privateKey = context.newRandomPrivateKey()
-const signer = (new CryptoFactory(context)).newSigner(privateKey)
+const privateKey = privKey;
 const crypto = require('crypto');
 
 const cbor = require('cbor')
@@ -38,19 +56,20 @@ const {protobuf} = require('sawtooth-sdk')
 //name = "foo"
 //address = INT_KEY_NAMESPACE + _hash(name).slice(-64)
 
-console.log('public:', signer.getPublicKey().asHex());
-console.log('private:', privateKey.privateKeyBytes.toString('hex'));
+const publicKey = Buffer.from(pubKey).toString('hex');
+console.log('public:', publicKey);
+console.log('private:', privKey.toString('hex'));
 
 const transactionHeaderBytes = protobuf.TransactionHeader.encode({
   familyName: 'intkey',
   familyVersion: '1.0',
   inputs: [address],
   outputs: [address],
-  signerPublicKey: signer.getPublicKey().asHex(),
+  signerPublicKey: publicKey,
   // In this example, we're signing the batch with the same private key,
   // but the batch can be signed by another party, in which case, the
   // public key will need to be associated with that key.
-  batcherPublicKey: signer.getPublicKey().asHex(),
+  batcherPublicKey: publicKey,
   // In this example, there are no dependencies.  This list should include
   // an previous transaction header signatures that must be applied for
   // this transaction to successfully commit.
@@ -61,9 +80,16 @@ const transactionHeaderBytes = protobuf.TransactionHeader.encode({
   nonce:"hey4"
 }).finish()
 
-let signature = signer.sign(transactionHeaderBytes)
+// let signature = signer.sign(transactionHeaderBytes)
+let dataHash = createHash('sha256').update(transactionHeaderBytes).digest()
+let result = secp256k1.ecdsaSign(dataHash, privKey);
+console.log(typeof result.signature)
+console.log(result.signature.toString('hex'))
+signature = Buffer.from(result.signature).toString('hex')
+
 console.log('sha1:', createHash('sha512').update(payloadBytes).digest('hex'))
 console.log('signature1:', signature)
+// let signature = secp256k1.ecdsaSign(transactionHeaderBytes, privKey);
 
 const transaction = protobuf.Transaction.create({
   header: transactionHeaderBytes,
@@ -88,13 +114,17 @@ let transactions = protobuf.TransactionList.decode(txnListBytes).transactions;
 //transactions = [transaction]
 
 const batchHeaderBytes = protobuf.BatchHeader.encode({
-  signerPublicKey: signer.getPublicKey().asHex(),
+  signerPublicKey: publicKey,
   transactionIds: transactions.map((txn) => txn.headerSignature),
 }).finish()
 
 
 
-signature = signer.sign(batchHeaderBytes)
+// signature = signer.sign(batchHeaderBytes)
+dataHash = createHash('sha256').update(batchHeaderBytes).digest()
+result = secp256k1.ecdsaSign(dataHash, privKey)
+signature = Buffer.from(result.signature).toString('hex')
+// signature = secp256k1.ecdsaSign(batchHeaderBytes, privKey);
 
 const batch = protobuf.Batch.create({
   header: batchHeaderBytes,
@@ -119,4 +149,5 @@ axios.post(`${HOST}/batches`, batchListBytes, {
   .catch((err)=>{
     console.log(err);
   });
+
 

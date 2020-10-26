@@ -1,12 +1,12 @@
 #!/bin/bash
 
-cd ./kafka
-  ./down.sh
-cd -
+# cd ./kafka
+#   ./down.sh
+# cd -
 
-cd ./mongodb
-  ./down.sh
-cd -
+# cd ./mongodb
+#   ./down.sh
+# cd -
 
 cd ./sawtooth
   ./down.sh
