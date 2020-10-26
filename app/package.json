@@ -17,6 +17,8 @@
     "secp256k1": "^4.0.2",
     "underscore": "^1.11.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "crypto-js": "^4.0.0"
+  },
   "description": ""
 }

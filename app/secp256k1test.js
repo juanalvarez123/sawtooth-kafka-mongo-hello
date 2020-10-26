@@ -1,5 +1,6 @@
 const { randomBytes } = require('crypto')
 const secp256k1 = require('secp256k1')
+const CryptoJS = require('crypto-js');
 
 const msg = randomBytes(32)
 
@@ -36,6 +37,10 @@ const hash = (x) =>
 const INT_KEY_FAMILY = 'intkey'
 const INT_KEY_NAMESPACE = hash(INT_KEY_FAMILY).substring(0, 6)
 const address = INT_KEY_NAMESPACE + hash('foo').slice(-64)
+
+let ss = crypto.createHash('sha512').update('intkey').digest('hex');
+console.log('intkey:', hash('intkey'));
+console.log('address:', address);
 
 const payload = {
   Verb: 'set',
@@ -82,9 +87,8 @@ const transactionHeaderBytes = protobuf.TransactionHeader.encode({
 
 // let signature = signer.sign(transactionHeaderBytes)
 let dataHash = createHash('sha256').update(transactionHeaderBytes).digest()
+
 let result = secp256k1.ecdsaSign(dataHash, privKey);
-console.log(typeof result.signature)
-console.log(result.signature.toString('hex'))
 signature = Buffer.from(result.signature).toString('hex')
 
 console.log('sha1:', createHash('sha512').update(payloadBytes).digest('hex'))
@@ -138,16 +142,16 @@ const batchListBytes = protobuf.BatchList.encode({
   batches: [batch]
 }).finish()
 
+// console.log(Buffer.from(batchListBytes).toString('hex'));
 
-
-axios.post(`${HOST}/batches`, batchListBytes, {
-  headers: {'Content-Type': 'application/octet-stream'}
-})
-  .then((response) => {
-    console.log(response.data);
-  })
-  .catch((err)=>{
-    console.log(err);
-  });
+// axios.post(`${HOST}/batches`, batchListBytes, {
+//   headers: {'Content-Type': 'application/octet-stream'}
+// })
+//   .then((response) => {
+//     console.log(response.data);
+//   })
+//   .catch((err)=>{
+//     console.log(err);
+//   });
 
 
