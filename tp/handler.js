@@ -128,6 +128,7 @@ class IntegerKeyHandler extends TransactionHandler {
   apply (transactionProcessRequest, context) {
     console.log('Something happened');
     console.log('___');
+
     // return Promise.reject(
     //   new InvalidTransaction("??")
     // );
@@ -135,7 +136,13 @@ class IntegerKeyHandler extends TransactionHandler {
     // console.log(a);
     // throw new InvalidTransaction("wait");
     
-    return _decodeCbor(transactionProcessRequest.payload)
+    return Promise.resolve()
+      .then(()=>{
+        console.log('Fire event');
+        return context.addEvent("myevent", [['name', 'myname']], Buffer.from("hello", "utf8"));
+      }).then(()=>{
+        return _decodeCbor(transactionProcessRequest.payload)
+      })
       .catch(_toInternalError)
       .then((update) => {
         //
@@ -201,7 +208,7 @@ class IntegerKeyHandler extends TransactionHandler {
             throw new InternalError('State Error!')
           }
           console.log(`Verb: ${verb} Name: ${name} Value: ${value}`)
-        })
+        });
       })
   }
 }

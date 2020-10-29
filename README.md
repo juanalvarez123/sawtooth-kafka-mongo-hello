@@ -25,6 +25,7 @@ cd ./app
   rm ./.env
   cp ./.env.docker-compose ./.env 
   
+  node ./sawtooth-sub-events.js
   node ./sawtooth-post.js
   node ./sawtooth-get.js
   node ./mongo-sample.js
@@ -68,6 +69,7 @@ cd ./app
   rm ./.env
   cp ./.env.minikube ./.env 
   
+  node ./sawtooth-sub-events.js
   node ./sawtooth-post.js
   node ./sawtooth-get.js
   node ./mongo-sample.js
@@ -105,6 +107,7 @@ kubectl run --rm -it borrar --image le999/app:1.0 --restart=Never -- bash
 
   cp ./.env.k8s ./.env 
   
+  node ./sawtooth-sub-events.js
   node ./sawtooth-post.js
   node ./sawtooth-get.js
   node ./mongo-sample.js
