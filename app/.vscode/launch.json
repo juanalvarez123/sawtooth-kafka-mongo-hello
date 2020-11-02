@@ -11,7 +11,8 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/ethers-test.js"
+            // "program": "${workspaceFolder}/secp256k1test.js"
+            "program": "${workspaceFolder}/ethers-test2.js"
         }
     ]
 }

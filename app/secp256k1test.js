@@ -91,7 +91,7 @@ let dataHash = createHash('sha256').update(transactionHeaderBytes).digest()
 let result = secp256k1.ecdsaSign(dataHash, privKey);
 signature = Buffer.from(result.signature).toString('hex')
 
-console.log('sha1:', createHash('sha512').update(payloadBytes).digest('hex'))
+console.log('sha1:', createHash('sha512').update(transactionHeaderBytes).digest('hex'))
 console.log('signature1:', signature)
 // let signature = secp256k1.ecdsaSign(transactionHeaderBytes, privKey);
 
@@ -150,14 +150,14 @@ batchListBytes = Buffer.from(
 
 console.log(Buffer.from(batchListBytes).toString('hex'));
 
-axios.post(`${HOST}/batches`, batchListBytes, {
-  headers: {'Content-Type': 'application/octet-stream'}
-})
-  .then((response) => {
-    console.log(response.data);
-  })
-  .catch((err)=>{
-    console.log(err);
-  });
+// axios.post(`${HOST}/batches`, batchListBytes, {
+//   headers: {'Content-Type': 'application/octet-stream'}
+// })
+//   .then((response) => {
+//     console.log(response.data);
+//   })
+//   .catch((err)=>{
+//     console.log(err);
+//   });
 
 
