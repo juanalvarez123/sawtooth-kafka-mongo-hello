@@ -77,17 +77,13 @@ function arrayBufferToWordArray(ab) {
   return CryptoJS.lib.WordArray.create(a, i8a.length);
 }
 
-//https://stackoverflow.com/questions/38987784/how-to-convert-a-hexadecimal-string-to-uint8array-and-back-in-javascript
-const fromHexString = hexString =>
-  new Uint8Array(hexString.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
-
 let sss=CryptoJS.SHA256(arrayBufferToWordArray(transactionHeaderBytes)).toString(CryptoJS.enc.Hex);
-let dataHash=fromHexString(sss);
+let dataHash=Uint8Array.from(Buffer.from(sss, 'hex'));
 
 let result = secp256k1.ecdsaSign(dataHash, privKey);
 let signature = Buffer.from(result.signature).toString('hex')
 
-console.log('sha1:', CryptoJS.SHA512(arrayBufferToWordArray(payloadBytes)).toString(CryptoJS.enc.Hex))
+console.log('sha1:', CryptoJS.SHA512(arrayBufferToWordArray(transactionHeaderBytes)).toString(CryptoJS.enc.Hex))
 console.log('signature1:', signature)
 
 
@@ -122,7 +118,7 @@ const batchHeaderBytes = protobuf.BatchHeader.encode({
 
 //
 sss=CryptoJS.SHA256(arrayBufferToWordArray(batchHeaderBytes)).toString(CryptoJS.enc.Hex);
-dataHash=fromHexString(sss);
+dataHash=Uint8Array.from(Buffer.from(sss, 'hex'));
 result = secp256k1.ecdsaSign(dataHash, privKey);
 signature = Buffer.from(result.signature).toString('hex')
 
@@ -132,18 +128,23 @@ const batch = protobuf.Batch.create({
   transactions: transactions
 })
 
-const batchListBytes = protobuf.BatchList.encode({
+let batchListBytes = protobuf.BatchList.encode({
     batches: [batch]
   }).finish()
 
-  // console.log(Buffer.from(batchListBytes).toString('hex'));
+console.log(Buffer.from(batchListBytes).toString('hex'));
 
-// axios.post(`${HOST}/batches`, batchListBytes, {
-//   headers: {'Content-Type': 'application/octet-stream'}
-// })
-//   .then((response) => {
-//     console.log(response.data);
-//   })
-//   .catch((err)=>{
-//     console.log(err);
-//   });
+// batchListBytes = Buffer.from(
+// '',
+// 'hex'
+// );
+
+axios.post(`${HOST}/batches`, batchListBytes, {
+  headers: {'Content-Type': 'application/octet-stream'}
+})
+  .then((response) => {
+    console.log(response.data);
+  })
+  .catch((err)=>{
+    console.log(err);
+  });
