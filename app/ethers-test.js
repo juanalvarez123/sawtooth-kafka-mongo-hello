@@ -85,10 +85,13 @@ async function run (){
     let rpublic2 = Buffer.from(rpk2, 'hex').toString('hex')
     console.log(rpublic2 == publicKey1)
 
-    const rpk3 = secp256k1.ecdsaRecover(Uint8Array.from(Buffer.from(signature1.slice(2, -2), 'hex')), parseInt(signature1.slice(-2), 16) - 27, fromHexString(msgHash1.slice(2)));
+    const rpk3 = secp256k1.ecdsaRecover(Uint8Array.from(Buffer.from(signature1.slice(2, -2), 'hex')), parseInt(signature1.slice(-2), 16) - 27, Uint8Array.from(Buffer.from(msgHash1.slice(2), 'hex')));
     let rpublic3 = Buffer.from(rpk3, 'hex').toString('hex')
     console.log(rpublic3 == publicKey1)
 
+
+    console.log(msgHash2)
+    console.log(signature2)
 }
 
 run();
