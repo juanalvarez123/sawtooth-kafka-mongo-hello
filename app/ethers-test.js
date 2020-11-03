@@ -7,7 +7,7 @@ const { ethers } = require('ethers');
 const secp256k1 = require('secp256k1')
 const createKeccakHash = require('keccak')
 
-
+//https://stackoverflow.com/questions/38987784/how-to-convert-a-hexadecimal-string-to-uint8array-and-back-in-javascript
 const fromHexString = hexString =>
   new Uint8Array(hexString.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
 
@@ -80,6 +80,14 @@ async function run (){
     let rpk = ethers.utils.recoverPublicKey(msgHash1Bytes, '0x' + signature2 + (splitSig2.v).toString(16));
     let rpublic = ethers.utils.computePublicKey(rpk, true);
     console.log(rpublic.slice(2) == publicKey1)
+
+    const rpk2 = secp256k1.ecdsaRecover(result.signature, result.recid, fromHexString(msgHash1.slice(2)));
+    let rpublic2 = Buffer.from(rpk2, 'hex').toString('hex')
+    console.log(rpublic2 == publicKey1)
+
+    const rpk3 = secp256k1.ecdsaRecover(Uint8Array.from(Buffer.from(signature1.slice(2, -2), 'hex')), parseInt(signature1.slice(-2), 16) - 27, fromHexString(msgHash1.slice(2)));
+    let rpublic3 = Buffer.from(rpk3, 'hex').toString('hex')
+    console.log(rpublic3 == publicKey1)
 
 }
 
