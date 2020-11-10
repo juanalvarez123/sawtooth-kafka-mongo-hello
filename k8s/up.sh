@@ -11,3 +11,7 @@ cd -
 cd ./sawtooth
   ./up.sh
 cd -
+
+# cd ./app
+#  .up.sh
+# cd -

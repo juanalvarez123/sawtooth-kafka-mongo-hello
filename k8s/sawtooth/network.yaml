@@ -122,7 +122,6 @@ items:
               - -c
               - "VALIDATOR=tcp://$HOSTNAME:4004 node ./index.js"
 
-
 - apiVersion: v1
   kind: Service
   metadata:
