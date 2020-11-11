@@ -49,7 +49,7 @@ items:
           #     - "VALIDATOR=tcp://$HOSTNAME:4004 node ./index.js"
 
           # - name: sawtooth-intkey-tp-python
-          #   image: hyperledger/sawtooth-intkey-tp-python:chime
+          #   image: hyperledger/sawtooth-intkey-tp-python:1.2.3
           #   command:
           #     - bash
           #   args:
@@ -57,7 +57,7 @@ items:
           #     - "intkey-tp-python -vv -C tcp://$HOSTNAME:4004"
 
           # - name: sawtooth-xo-tp-python
-          #   image: hyperledger/sawtooth-xo-tp-python:chime
+          #   image: hyperledger/sawtooth-xo-tp-python:1.2.3
           #   command:
           #     - bash
           #   args:
