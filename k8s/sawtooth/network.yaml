@@ -115,7 +115,7 @@ items:
 
 
           - name: sawtooth-intkey-tp-js
-            image: le999/tp:1.0
+            image: le999/tp1:1.0
             command:
               - bash
             args:
