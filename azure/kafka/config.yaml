@@ -1,0 +1,3 @@
+image:
+  repository: bitnami/kafka
+  tag: 2.6.0

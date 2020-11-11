@@ -1,0 +1,16 @@
+#!/bin/bash
+
+cd ./kafka
+  ./down.sh
+cd -
+
+cd ./mongodb
+  ./down.sh
+cd -
+
+cd ./sawtooth
+  ./down.sh
+cd -
+
+kubectl delete pvc --all
+kubectl delete pv --all
