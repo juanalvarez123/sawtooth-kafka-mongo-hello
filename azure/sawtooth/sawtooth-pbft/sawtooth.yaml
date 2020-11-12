@@ -34,6 +34,7 @@ items:
       metadata:
         labels:
           name: pbft-0
+          app: sawtooth-org0
       spec:
         containers:
           # - name: sawtooth-intkey-tp-python
@@ -220,6 +221,7 @@ items:
       metadata:
         labels:
           name: pbft-1
+          app: sawtooth-org0
       spec:
         containers:
           # - name: sawtooth-intkey-tp-python
@@ -394,6 +396,7 @@ items:
       metadata:
         labels:
           name: pbft-2
+          app: sawtooth-org1
       spec:
         containers:
           # - name: sawtooth-intkey-tp-python
@@ -568,6 +571,7 @@ items:
       metadata:
         labels:
           name: pbft-3
+          app: sawtooth-org1
       spec:
         containers:
           # - name: sawtooth-intkey-tp-python
@@ -728,3 +732,67 @@ items:
 
 
 
+
+
+
+
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: sawtooth-org0
+  spec:
+    type: ClusterIP
+    selector:
+      app: sawtooth-org0
+    ports:
+      - name: "4004"
+        protocol: TCP
+        port: 4004
+        targetPort: 4004
+      - name: "5050"
+        protocol: TCP
+        port: 5050
+        targetPort: 5050
+      - name: "8008"
+        protocol: TCP
+        port: 8008
+        targetPort: 8008
+      - name: "8080"
+        protocol: TCP
+        port: 8080
+        targetPort: 8080
+      - name: "8800"
+        protocol: TCP
+        port: 8800
+        targetPort: 8800
+
+
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: sawtooth-org1
+  spec:
+    type: ClusterIP
+    selector:
+      app: sawtooth-org1
+    ports:
+      - name: "4004"
+        protocol: TCP
+        port: 4004
+        targetPort: 4004
+      - name: "5050"
+        protocol: TCP
+        port: 5050
+        targetPort: 5050
+      - name: "8008"
+        protocol: TCP
+        port: 8008
+        targetPort: 8008
+      - name: "8080"
+        protocol: TCP
+        port: 8080
+        targetPort: 8080
+      - name: "8800"
+        protocol: TCP
+        port: 8800
+        targetPort: 8800
