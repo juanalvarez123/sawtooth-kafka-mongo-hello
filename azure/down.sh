@@ -12,11 +12,9 @@ cd ./sawtooth
   ./down.sh
 cd -
 
-cd ./app
- ./down.sh
-cd -
-
-kubectl -f ./storage-class-minikube.yaml delete
+# cd ./app
+#  ./down.sh
+# cd -
 
 kubectl delete pvc --all
 kubectl delete pv --all

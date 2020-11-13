@@ -1,8 +1,5 @@
 #!/bin/bash
 
-kubectl -f ./storage-class-minikube.yaml apply
-
-
 cd ./kafka
   ./up.sh
 cd -
@@ -15,6 +12,8 @@ cd ./sawtooth
   ./up.sh
 cd -
 
-cd ./app
- ./up.sh
-cd -
+# cd ./app
+#  ./up.sh
+# cd -
+
+./wait-for-pods.sh pbft-0 pbft-1 pbft-2 pbft-3

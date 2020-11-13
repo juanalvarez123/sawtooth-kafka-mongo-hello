@@ -189,21 +189,21 @@ items:
         port: 8800
         targetPort: 8800
 
-- apiVersion: v1
-  kind: Service
-  metadata:
-    name: sawtooth-0-lb
-  spec:
-    selector:
-      name: pbft-0
-    ports:
-      - name: sw-nodeport
-        port: 8008
-        nodePort: 30008
-      - name: sw-nodeport2
-        port: 8800
-        nodePort: 30009
-    type: LoadBalancer
+# - apiVersion: v1
+#   kind: Service
+#   metadata:
+#     name: sawtooth-0-lb
+#   spec:
+#     selector:
+#       name: pbft-0
+#     ports:
+#       - name: sw-nodeport
+#         port: 8008
+#         nodePort: 30008
+#       - name: sw-nodeport2
+#         port: 8800
+#         nodePort: 30009
+#     type: LoadBalancer
 
 
 # --------------------------=== pod 1 ===--------------------------
@@ -364,21 +364,21 @@ items:
         port: 8800
         targetPort: 8800
 
-- apiVersion: v1
-  kind: Service
-  metadata:
-    name: sawtooth-1-lb
-  spec:
-    selector:
-      name: pbft-1
-    ports:
-      - name: sw-nodeport
-        port: 8008
-        nodePort: 30010
-      - name: sw-nodeport2
-        port: 8800
-        nodePort: 30011
-    type: LoadBalancer
+# - apiVersion: v1
+#   kind: Service
+#   metadata:
+#     name: sawtooth-1-lb
+#   spec:
+#     selector:
+#       name: pbft-1
+#     ports:
+#       - name: sw-nodeport
+#         port: 8008
+#         nodePort: 30010
+#       - name: sw-nodeport2
+#         port: 8800
+#         nodePort: 30011
+#     type: LoadBalancer
 
 
 # --------------------------=== pod 2 ===--------------------------
@@ -539,21 +539,21 @@ items:
         port: 8800
         targetPort: 8800
 
-- apiVersion: v1
-  kind: Service
-  metadata:
-    name: sawtooth-2-lb
-  spec:
-    selector:
-      name: pbft-2
-    ports:
-      - name: sw-nodeport
-        port: 8008
-        nodePort: 30012
-      - name: sw-nodeport2
-        port: 8800
-        nodePort: 30013
-    type: LoadBalancer
+# - apiVersion: v1
+#   kind: Service
+#   metadata:
+#     name: sawtooth-2-lb
+#   spec:
+#     selector:
+#       name: pbft-2
+#     ports:
+#       - name: sw-nodeport
+#         port: 8008
+#         nodePort: 30012
+#       - name: sw-nodeport2
+#         port: 8800
+#         nodePort: 30013
+#     type: LoadBalancer
 
 
 # --------------------------=== pod 3 ===--------------------------
@@ -714,24 +714,21 @@ items:
         port: 8800
         targetPort: 8800
 
-- apiVersion: v1
-  kind: Service
-  metadata:
-    name: sawtooth-3-lb
-  spec:
-    selector:
-      name: pbft-3
-    ports:
-      - name: sw-nodeport
-        port: 8008
-        nodePort: 30014
-      - name: sw-nodeport2
-        port: 8800
-        nodePort: 30015
-    type: LoadBalancer
-
-
-
+# - apiVersion: v1
+#   kind: Service
+#   metadata:
+#     name: sawtooth-3-lb
+#   spec:
+#     selector:
+#       name: pbft-3
+#     ports:
+#       - name: sw-nodeport
+#         port: 8008
+#         nodePort: 30014
+#       - name: sw-nodeport2
+#         port: 8800
+#         nodePort: 30015
+#     type: LoadBalancer
 
 
 
