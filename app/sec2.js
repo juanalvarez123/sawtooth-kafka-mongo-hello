@@ -10,12 +10,14 @@ const cbor = require('cbor')
 // const msg = randomBytes(32)
 
 // generate privKey
-// let privKey
-// do {
-//   privKey = randomBytes(32)
-// } while (!secp256k1.privateKeyVerify(privKey))
+let privKey
+do {
+  a = CryptoJS.lib.WordArray.random(32).toString(CryptoJS.enc.Hex)
+  console.log("a:", a);
+  privKey = Buffer.from(a, 'hex')
+} while (!secp256k1.privateKeyVerify(privKey))
 
-let privKey = Buffer.from("104b1cf90d4171c1b606e53ffe2f52c6f46320b06ef9c1a8fa01f5a0c4ca339a", "hex")
+// let privKey = Buffer.from("104b1cf90d4171c1b606e53ffe2f52c6f46320b06ef9c1a8fa01f5a0c4ca339a", "hex")
 
 // get the public key in a compressed format
 const pubKey = secp256k1.publicKeyCreate(privKey)
