@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rethinkdb0-lb
+spec:
+  selector:
+    app: rethinkdb-proxy
+    release: rethinkdb1
+  ports:
+    - name: "db"
+      port: 28015
+      nodePort: 32017
+    - name: "admin"
+      port: 8080
+      nodePort: 32018
+  type: LoadBalancer
