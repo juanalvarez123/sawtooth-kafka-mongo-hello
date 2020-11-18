@@ -14,7 +14,7 @@
 
 
 cd ./rethinkdb
-  ./up-dev.sh
+  ./up.sh
 cd -
 
 # cd ./app

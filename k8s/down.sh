@@ -12,5 +12,9 @@ cd ./sawtooth
   ./down.sh
 cd -
 
+cd ./rethinkdb
+  ./down.sh
+cd -
+
 kubectl delete pvc --all
 kubectl delete pv --all

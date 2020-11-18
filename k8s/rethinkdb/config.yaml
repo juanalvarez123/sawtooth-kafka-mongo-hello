@@ -1,0 +1,2 @@
+cluster:
+  replicas: 1
