@@ -8,9 +8,9 @@
 #   ./up.sh
 # cd -
 
-# cd ./sawtooth
-#   ./up.sh
-# cd -
+cd ./sawtooth
+  ./up.sh
+cd -
 
 cd ./rethinkdb
   ./up-dev.sh
