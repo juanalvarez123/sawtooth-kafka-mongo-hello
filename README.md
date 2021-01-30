@@ -1,10 +1,40 @@
+## Install Dependencies
+* [docker](https://docs.docker.com/engine/install/ubuntu/)
+* [docker-compose](https://docs.docker.com/compose/install/)
+* [node 10](https://nodejs.org/en/download/) maybe works with v12
+
+
+## Windows aditional dependencies (Requires revision)
+
+1) Install visual studio
+2) Run:
+```bash
+npm install --global --production windows-build-toolsnpm config set msvs_version 2017 --global
+```
+
+3) node 12?
+
+Another option:
+[WSL 2]
+(https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+
+```bash
+npm install --global --production windows-build-toolsnpm config set msvs_version 2015 --global
+```
+
+# Runing
+
 ## docker-compose
 
-Must install docker-compose
+
+
 ```bash
-./up.sh
+cd ./docker-compose
+  ./up.sh
+cd
+```
 
-
+```bash
 #Run Sawtooth transaction processor
 cd ./tp
   npm install
@@ -15,8 +45,10 @@ cd -
 
 
 ```
+
 Mongo Express to see mongodb:
 http://localhost:8081/
+
 
 ```bash
 
@@ -36,11 +68,14 @@ cd ./app
   node ./send.js  #Repeat
 cd -
 
-
-./down.sh
-
 ```
 
+```bash
+#Close 
+cd ./docker-compose
+  ./down.sh
+cd -
+```
 
 ## K8s
 
