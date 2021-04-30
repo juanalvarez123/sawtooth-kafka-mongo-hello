@@ -9,33 +9,26 @@ const privateKey = context.newRandomPrivateKey()
 const signer = (new CryptoFactory(context)).newSigner(privateKey)
 const crypto = require('crypto');
 
-const cbor = require('cbor')
-
 const HOST = process.env.SAWTOOTH_HOST;
 
-// const hash = (x) =>
-//   crypto.createHash('sha512').update(x).digest('hex').toLowerCase()
 
-// const INT_KEY_FAMILY = 'intkey'
-// const INT_KEY_NAMESPACE = hash(INT_KEY_FAMILY).substring(0, 6)
-// const address = INT_KEY_NAMESPACE + hash('foo').slice(-64)
+const hash = (x) =>
+  crypto.createHash('sha512').update(x).digest('hex').toLowerCase()
 
-// const hash = (x) =>
-//   crypto.createHash('sha512').update(x).digest('hex').toLowerCase()
+const TP_FAMILY = 'tp1'
+const TP_NAMESPACE = hash(TP_FAMILY).substring(0, 6)
 
-// const INT_KEY_FAMILY = 'intkey'
-// const INT_KEY_NAMESPACE = hash(INT_KEY_FAMILY).substring(0, 6)
-// const address = INT_KEY_NAMESPACE + hash('foo').slice(-64)
-const address = '1cf1266e282c41be5e4254d8820772c5518a2c5a8c0c7f7eda19594a7eb539453e1ed7'
+const address = (k) => 
+  TP_NAMESPACE + hash(k).slice(-64)
 
 axios({
   method: 'get',
-  url: `${HOST}/state/${address}`,
+  url: `${HOST}/state/${address('foo')}`,
   headers: {'Content-Type': 'application/json'}
 })
   .then(function (response) {
     let base = Buffer.from(response.data.data, 'base64');
-    let stateValue = cbor.decodeFirstSync(base);
+    let stateValue = JSON.parse(base, 'utf-8');
     console.log(stateValue);
   })
   .catch(err => {

@@ -8,41 +8,33 @@ const privateKey = context.newRandomPrivateKey()
 const signer = (new CryptoFactory(context)).newSigner(privateKey)
 const crypto = require('crypto');
 
-const cbor = require('cbor')
-
 const HOST = process.env.SAWTOOTH_HOST;
 
 const hash = (x) =>
   crypto.createHash('sha512').update(x).digest('hex').toLowerCase()
 
-const INT_KEY_FAMILY = 'intkey'
-const INT_KEY_NAMESPACE = hash(INT_KEY_FAMILY).substring(0, 6)
-const address = INT_KEY_NAMESPACE + hash('foo').slice(-64)
+const TP_FAMILY = 'tp1';
+const TP_vERSION = '1.0';
+const TP_NAMESPACE = hash(TP_FAMILY).substring(0, 6);
+
+const address = (k) => 
+  TP_NAMESPACE + hash(k).slice(-64)
 
 const payload = {
-  Verb: 'set',
-  Name: 'foo',
-  Value: 41
+  key: 'foo',
+  value: 42
 }
 
-const payloadBytes = cbor.encode(payload)
+const payloadBytes = Buffer.from(JSON.stringify(payload), 'utf8');
 
 const {createHash} = require('crypto')
 const {protobuf} = require('sawtooth-sdk')
 
-
-//input and output addresses
-//const _hash = (x) =>
-//   crypto.createHash('sha512').update(x).digest('hex').toLowerCase()
-//
-//name = "foo"
-//address = INT_KEY_NAMESPACE + _hash(name).slice(-64)
-
 const transactionHeaderBytes = protobuf.TransactionHeader.encode({
-  familyName: 'intkey',
-  familyVersion: '1.0',
-  inputs: [address],
-  outputs: [address],
+  familyName: TP_FAMILY,
+  familyVersion: TP_vERSION,
+  inputs: [address(payload.key)],
+  outputs: [address(payload.key)],
   signerPublicKey: signer.getPublicKey().asHex(),
   // In this example, we're signing the batch with the same private key,
   // but the batch can be signed by another party, in which case, the

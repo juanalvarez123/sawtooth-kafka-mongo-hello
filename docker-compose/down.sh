@@ -2,4 +2,4 @@
 
 docker rm $(docker ps -a -q)
 docker-compose -f ./docker-compose.yaml -v down
-docker volume prune -f
+# docker volume prune -f
