@@ -7,11 +7,10 @@ const context = createContext('secp256k1')
 const privateKey = context.newRandomPrivateKey()
 const signer = (new CryptoFactory(context)).newSigner(privateKey)
 const crypto = require('crypto');
-
-const HOST = process.env.SAWTOOTH_HOST;
-
 const hash = (x) =>
   crypto.createHash('sha512').update(x).digest('hex').toLowerCase()
+
+const HOST = process.env.SAWTOOTH_HOST;
 
 const TP_FAMILY = 'tp1';
 const TP_vERSION = '1.0';

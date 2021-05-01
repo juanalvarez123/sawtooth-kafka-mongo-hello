@@ -11,7 +11,7 @@ if(!uri){
 console.log('uri:', uri);
 
 // Create a new MongoClient
-const client = new MongoClient(uri);
+const client = new MongoClient(uri, { useUnifiedTopology: true });
 
 async function run() {
   try {
