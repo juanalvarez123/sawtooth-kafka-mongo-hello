@@ -25,7 +25,6 @@ main(){
 	install_docker_compose
 	#install_go
 	install_node
-	nvm install v10
 	#apt-get install python build-essential -y
 	#install_fabric_samples
 	echo "lougout and login"

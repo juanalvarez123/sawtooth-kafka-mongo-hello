@@ -26,6 +26,9 @@ npm install --global --production windows-build-toolsnpm config set msvs_version
 
 ```bash
 ./install-dependencies.sh
+#Restart
+nvm install v10
+
 ```
 
 # Runing
