@@ -22,6 +22,12 @@ Another option:
 npm install --global --production windows-build-toolsnpm config set msvs_version 2015 --global
 ```
 
+## Linux Dependencies
+
+```bash
+./install-dependencies.sh
+```
+
 # Runing
 
 ## docker-compose
