@@ -6,12 +6,15 @@ services:
     image: 'docker.io/bitnami/zookeeper:3.6.2'
     ports:
       - '2181:2181'
-    # volumes:
-    #   - 'zookeeper_data:/bitnami'
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
 
-# Sawtooth----------------------------------
+  intkey-tp-python:
+    image: hyperledger/sawtooth-intkey-tp-python:chime
+    container_name: sawtooth-intkey-tp-python-default
+    depends_on:
+      - validator
+    entrypoint: intkey-tp-python -vv -C tcp://validator:4004
 
   settings-tp:
     image: hyperledger/sawtooth-settings-tp:1.2.6
