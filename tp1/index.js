@@ -20,7 +20,7 @@
 require('dotenv').config();
 
 const { TransactionProcessor } = require('sawtooth-sdk/processor')
-const IntegerKeyHandler = require('./handler')
+const Tp1Handler = require('./handler')
 
 if (typeof process.env.VALIDATOR === 'undefined') {
   console.log('missing a validator address')
@@ -30,7 +30,6 @@ console.log(process.env.VALIDATOR)
 const address = process.env.VALIDATOR
 
 const transactionProcessor = new TransactionProcessor(address)
-
-transactionProcessor.addHandler(new IntegerKeyHandler())
+transactionProcessor.addHandler(new Tp1Handler())
 
 transactionProcessor.start()

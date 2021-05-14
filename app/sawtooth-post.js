@@ -7,8 +7,7 @@ const context = createContext('secp256k1')
 const privateKey = context.newRandomPrivateKey()
 const signer = (new CryptoFactory(context)).newSigner(privateKey)
 const crypto = require('crypto');
-const hash = (x) =>
-  crypto.createHash('sha512').update(x).digest('hex').toLowerCase()
+const hash = (x) => crypto.createHash('sha512').update(x).digest('hex').toLowerCase()
 
 const HOST = process.env.SAWTOOTH_HOST;
 
@@ -19,8 +18,9 @@ const TP_NAMESPACE = hash(TP_FAMILY).substring(0, 6);
 const address = (k) => TP_NAMESPACE + hash(k).slice(-64)
 
 const payload = {
-  key: 'jsae',
-  value: 31
+  authorizationId: '1085277715',
+  doctorSign: 'Juan Sebastian Alvarez Eraso',
+  description: 'Esta es la primera autorización almacenada en el blockchain'
 }
 
 const payloadBytes = Buffer.from(JSON.stringify(payload), 'utf8');
@@ -31,12 +31,12 @@ const {protobuf} = require('sawtooth-sdk')
 const transactionHeaderBytes = protobuf.TransactionHeader.encode({
   familyName: TP_FAMILY,
   familyVersion: TP_VERSION,
-  inputs: [address(payload.key)],
-  outputs: [address(payload.key)],
+  inputs: [address(payload.authorizationId)],
+  outputs: [address(payload.authorizationId)],
   signerPublicKey: signer.getPublicKey().asHex(),
   // In this example, we're signing the batch with the same private key,
   // but the batch can be signed by another party, in which case, the
-  // public key will need to be associated with that key.
+  // public key will need to be associated with that key
   batcherPublicKey: signer.getPublicKey().asHex(),
   // In this example, there are no dependencies. This list should include
   // an previous transaction header signatures that must be applied for
