@@ -8,7 +8,7 @@ const {
 const crypto = require('crypto')
 
 const TP_FAMILY = 'tp1';
-const TP_vERSION = '1.0';
+const TP_VERSION = '1.0';
 
 const hash = (x) => crypto.createHash('sha512').update(x).digest('hex').toLowerCase()
 
@@ -18,7 +18,7 @@ const address = (k) => TP_NAMESPACE + hash(k).slice(-64)
 
 class Tp1Handler extends TransactionHandler {
   constructor() {
-    super(TP_FAMILY, [TP_vERSION], [TP_NAMESPACE])
+    super(TP_FAMILY, [TP_VERSION], [TP_NAMESPACE])
   }
 
   async apply(transactionProcessRequest, context) {
