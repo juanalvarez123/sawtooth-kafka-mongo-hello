@@ -19,7 +19,6 @@
 
 require('dotenv').config();
 
-
 const { TransactionProcessor } = require('sawtooth-sdk/processor')
 const IntegerKeyHandler = require('./handler')
 
@@ -35,4 +34,3 @@ const transactionProcessor = new TransactionProcessor(address)
 transactionProcessor.addHandler(new IntegerKeyHandler())
 
 transactionProcessor.start()
-
