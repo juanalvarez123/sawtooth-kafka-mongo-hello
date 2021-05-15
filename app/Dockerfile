@@ -8,7 +8,4 @@ RUN npm install
 
 COPY . .
 
-# EXPOSE 3000
-
-# CMD [ "node", "get.js" ]
 CMD [ "sleep", "3600" ]

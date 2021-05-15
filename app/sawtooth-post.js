@@ -23,7 +23,7 @@ const payload = {
   description: 'Esta es la primera autorización almacenada en el blockchain'
 }
 
-const payloadBytes = Buffer.from(JSON.stringify(payload), 'utf8');
+const payloadBytes = Buffer.from(JSON.stringify(payload), 'utf-8');
 
 const {createHash} = require('crypto')
 const {protobuf} = require('sawtooth-sdk')

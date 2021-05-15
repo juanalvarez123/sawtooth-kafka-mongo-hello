@@ -1,9 +1,6 @@
 require('dotenv').config();
 
-const {createContext, CryptoFactory} = require('sawtooth-sdk/signing')
-
 const axios = require('axios');
-const context = createContext('secp256k1')
 const crypto = require('crypto');
 
 const HOST = process.env.SAWTOOTH_HOST;
