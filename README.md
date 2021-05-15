@@ -14,6 +14,29 @@
 nvm install v10
 ```
 
+## Architecture
+
+![Screenshot](./assets/architecture.png)
+
+## URLs
+
+### Sawtooth API
+
+```bash
+# Obtener todos los bloques del blockchain
+GET http://localhost:8008/blocks
+```
+
+```bash
+# Crear un batch que contiene una o muchas transacciones y retorna el ID del batch
+POST http://localhost:8008/batches
+```
+
+```bash
+# Consultar por el ID/Key del estado la información de un estado
+GET http://localhost:8008/state/{key}
+```
+
 ## Running
 
 ### docker-compose
