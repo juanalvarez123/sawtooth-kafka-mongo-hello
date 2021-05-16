@@ -1,12 +1,18 @@
-# Sawtooth authorizations example
+# Transaction processor personalizado con Sawtooth
 
-## Install dependencies
+Este proyecto te permite crear un blockchain usando el framework de **Hyperledger Sawtooth**.
+
+El transaction processor es creado de forma personalizada y la familia que usa se llama `tp1`. La familia `tp1` se encarga de procesar autorizaciones médicas.
+
+Cada autorización médica debe contar con ciertos requisitos, el único obligatorio (Por ahora) es que cuente con un "authorizationId". 
+
+## Requerimientos
 
 * [docker](https://docs.docker.com/engine/install/ubuntu/)
 * [docker-compose](https://docs.docker.com/compose/install/)
-* [node 10](https://nodejs.org/en/download/) ... maybe works with v12.
+* [node 10](https://nodejs.org/en/download/) ... talvez funcione con node v12.
 
-## Linux dependencies
+## Dependencias Linux
 
 ```bash
 ./install-dependencies.sh
@@ -14,13 +20,28 @@
 nvm install v10
 ```
 
-## Architecture
+## Despliegue local
+
+```bash
+./init.sh
+./up.sh
+./down.sh
+```
+
+## Arquitectura
 
 ![Screenshot](./assets/architecture.png)
+
+## Archivos
+
+* [Crear una transacción con sawtooth-post.js](https://github.com/juanalvarez123/sawtooth-kafka-mongo-hello/blob/master/app/sawtooth-post.js).
+* [Consultar la transacción creada con sawtooth-get.js](https://github.com/juanalvarez123/sawtooth-kafka-mongo-hello/blob/master/app/sawtooth-get.js)
 
 ## URLs
 
 ### Sawtooth API
+
+El API de Sawtooth permite crear transacciones (En bloques batch) y también consultar los bloques y los estados del blockchain:
 
 ```bash
 # Obtener todos los bloques del blockchain
@@ -37,18 +58,13 @@ POST http://localhost:8008/batches
 GET http://localhost:8008/state/{key}
 ```
 
-## Running
+### Sawtooth explorer
 
-### docker-compose
+Explorador, ofrece una consola web amigable y permite consultar los bloques del blockchain:
+[http://localhost:8091](http://localhost:8091)
 
-```bash
-./init.sh
-./up.sh
-./down.sh
-```
+## Código
 
-### Code
+En `app/` hay scripts en Node para crear y consultar transacciones.
 
-In `./app/` there are scripts to test sawtooth.
-
-`tp1` has the transaction procesor (Similar to a smart contract). This transaction processor stores a value with a key like a map or hashtable.
+En `tp1` se encuentra el transaction processor (Similar a un smart contract). Este transaction processor almacena los valores con un key (autorizationId) como un mapa o un hashtable.
